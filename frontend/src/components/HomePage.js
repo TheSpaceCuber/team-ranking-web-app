@@ -1,0 +1,149 @@
+import React, { useEffect, useState } from "react"
+import Button from 'react-bootstrap/Button'
+import axios from 'axios'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table';
+
+const HomePage = () => {
+    const [results, setResults] = useState([])
+    const [resultDetails, setResultDetails] = useState([])
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/")
+            .then((res) => {
+                setResults(res.data)
+            })
+            .catch((err) => console.log(err))
+
+    }, [])
+
+    const handleDelete = (id) => {
+        axios.delete("http://localhost:5000/delete/" + id)
+            .then((res) => {
+                console.log("HI")
+
+                console.log(results.filter((result) => result._id !== id))
+                setResults(results.filter((result) => result._id !== id))
+            })
+            .catch((err) => console.log(err))
+    }
+
+    const showDetails = (id) => {
+        axios.get("http://localhost:5000/" + id)
+            .then((res) => {
+                setResultDetails(res.data)
+            })
+            .catch((err) => console.log(err))
+    }
+    return (
+        <Container className='mt-3'>
+            <Row>
+                <Col sm={3}>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Round</th>
+                                <th>Details</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {results.map((val, key) => {
+                                return (
+                                    <tr key={key}>
+                                        <td>
+                                            {key + 1}
+                                        </td>
+                                        <td>
+                                            <Button onClick={() => showDetails(val._id)} size="sm" variant="primary">Show</Button>
+                                        </td>
+                                        <td>
+                                            <Button onClick={() => handleDelete(val._id)} size="sm" variant="danger">Delete</Button>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                </Col>
+                <Col>
+                    <Row>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Team (G1)</th>
+                                    <th>Wins</th>
+                                    <th>Draws</th>
+                                    <th>Losses</th>
+                                    <th>Points</th>
+                                    <th>Total Goals</th>
+                                    <th>Alt Points</th>
+                                    <th>Registration Date</th>
+                                    <th>Qualify?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* Justification for adding question mark below: 
+                            https://stackoverflow.com/questions/69080597/%C3%97-typeerror-cannot-read-properties-of-undefined-reading-map */}
+                                {resultDetails['groupOne']?.map((val, key) => {
+                                    return (
+                                        <tr key={key}>
+                                            <td>{val.teamName}</td>
+                                            <td>{val.wins}</td>
+                                            <td>{val.draws}</td>
+                                            <td>{val.losses}</td>
+                                            <td>{val.points}</td>
+                                            <td>{val.totalGoals}</td>
+                                            <td>{val.altPoints}</td>
+                                            {/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString */}
+                                            <td>{new Date(val.registrationDate).toLocaleDateString('en-GB')}</td>
+                                            <td>{key < 4 ? "Y" : "N"}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </Table>
+                    </Row>
+                    <Row>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Team (G2)</th>
+                                    <th>Wins</th>
+                                    <th>Draws</th>
+                                    <th>Losses</th>
+                                    <th>Points</th>
+                                    <th>Total Goals</th>
+                                    <th>Alt Points</th>
+                                    <th>Registration Date</th>
+                                    <th>Qualify?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {resultDetails['groupTwo']?.map((val, key) => {
+                                    return (
+                                        <tr key={key}>
+                                            <td>{val.teamName}</td>
+                                            <td>{val.wins}</td>
+                                            <td>{val.draws}</td>
+                                            <td>{val.losses}</td>
+                                            <td>{val.points}</td>
+                                            <td>{val.totalGoals}</td>
+                                            <td>{val.altPoints}</td>
+                                            <td>{new Date(val.registrationDate).toLocaleDateString('en-GB')}</td>
+                                            <td>{key < 4 ? "Y" : "N"}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </Table>
+                    </Row>
+                </Col>
+            </Row>
+        </Container>
+    )
+}
+
+export default HomePage
