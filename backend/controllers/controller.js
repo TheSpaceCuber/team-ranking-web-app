@@ -39,10 +39,9 @@ export async function findResultById(req, res) {
  */
 export async function submitNewRound(req, res) {
     try {
-        if (!(errorChecker.isValidTeamInfo(req.body.teamInfo.split("\n")) 
-                && errorChecker.isValidMatchResult(req.body.matchResult.split("\n")))) {
-                    throw new Error('Invalid Input')
-                }
+        errorChecker.isValidTeamInfo(req.body.teamInfo.split("\n"))
+        errorChecker.isValidMatchResult(req.body.matchResult.split("\n"))
+        
         const scoreboard = parser.generateScoreboard(req.body.teamInfo, req.body.matchResult)
         const teamRanking = parser.rankTeams(scoreboard)
         
@@ -52,8 +51,8 @@ export async function submitNewRound(req, res) {
         })
         res.status(201).json(result)
     } catch (err) {
-        res.status(500).json({'message': 'Invalid Input'})
-        console.log(err)
+        res.status(500).json({'message': err.message})
+        console.log(err.message)
     }
 }
 
