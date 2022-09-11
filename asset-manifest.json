@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/team-ranking-web-app/static/css/main.29cd549e.css",
+    "main.js": "/team-ranking-web-app/static/js/main.4bc356b4.js",
+    "index.html": "/team-ranking-web-app/index.html",
+    "main.29cd549e.css.map": "/team-ranking-web-app/static/css/main.29cd549e.css.map",
+    "main.4bc356b4.js.map": "/team-ranking-web-app/static/js/main.4bc356b4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.29cd549e.css",
+    "static/js/main.4bc356b4.js"
+  ]
+}
