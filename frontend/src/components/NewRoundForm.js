@@ -16,7 +16,7 @@ const NewRoundForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        axios.post("http://localhost:5000/new-round", { teamInfo, matchResult })
+        axios.post("https://lionfish-app-38qhg.ondigitalocean.app/new-round", { teamInfo, matchResult })
             .then(res => console.log(res.data))
             .catch((err) => {
                 alert(err.response.data.message)

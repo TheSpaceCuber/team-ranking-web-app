@@ -11,7 +11,7 @@ const HomePage = () => {
     const [resultDetails, setResultDetails] = useState([])
 
     useEffect(() => {
-        axios.get("http://localhost:5000/")
+        axios.get("https://lionfish-app-38qhg.ondigitalocean.app/")
             .then((res) => {
                 setResults(res.data)
             })
@@ -20,10 +20,8 @@ const HomePage = () => {
     }, [])
 
     const handleDelete = (id) => {
-        axios.delete("http://localhost:5000/delete/" + id)
+        axios.delete("https://lionfish-app-38qhg.ondigitalocean.app/delete/" + id)
             .then((res) => {
-                console.log("HI")
-
                 console.log(results.filter((result) => result._id !== id))
                 setResults(results.filter((result) => result._id !== id))
             })
@@ -31,7 +29,7 @@ const HomePage = () => {
     }
 
     const showDetails = (id) => {
-        axios.get("http://localhost:5000/" + id)
+        axios.get("https://lionfish-app-38qhg.ondigitalocean.app/" + id)
             .then((res) => {
                 setResultDetails(res.data)
             })
