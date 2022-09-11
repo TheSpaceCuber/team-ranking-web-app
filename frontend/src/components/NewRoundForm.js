@@ -23,7 +23,7 @@ const NewRoundForm = () => {
                 console.log(err.response.data.message)
             })
         navigate('/')
-        
+        navigate(0)
     }
 
     return (
