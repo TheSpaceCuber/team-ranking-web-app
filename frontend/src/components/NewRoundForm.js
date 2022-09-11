@@ -13,10 +13,14 @@ const NewRoundForm = () => {
 
     const navigate = useNavigate()
 
+    const api_endpoint = process.env.REACT_APP_ENV === "DEV" 
+        ? "http://localhost:5000/"
+        : "https://lionfish-app-38qhg.ondigitalocean.app/"
+
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        axios.post("https://lionfish-app-38qhg.ondigitalocean.app/new-round", { teamInfo, matchResult })
+        axios.post(api_endpoint + "new-round", { teamInfo, matchResult })
             .then(res => console.log(res.data))
             .catch((err) => {
                 alert(err.response.data.message)

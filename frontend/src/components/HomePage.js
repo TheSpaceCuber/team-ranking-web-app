@@ -10,17 +10,21 @@ const HomePage = () => {
     const [results, setResults] = useState([])
     const [resultDetails, setResultDetails] = useState([])
 
+    const api_endpoint = process.env.REACT_APP_ENV === "DEV"
+        ? "http://localhost:5000/"
+        : "https://lionfish-app-38qhg.ondigitalocean.app/"
+
     useEffect(() => {
-        axios.get("https://lionfish-app-38qhg.ondigitalocean.app/")
+        axios.get(api_endpoint)
             .then((res) => {
                 setResults(res.data)
             })
             .catch((err) => console.log(err))
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleDelete = (id) => {
-        axios.delete("https://lionfish-app-38qhg.ondigitalocean.app/delete/" + id)
+        axios.delete(api_endpoint + "delete/" + id)
             .then((res) => {
                 console.log(results.filter((result) => result._id !== id))
                 setResults(results.filter((result) => result._id !== id))
@@ -29,7 +33,7 @@ const HomePage = () => {
     }
 
     const showDetails = (id) => {
-        axios.get("https://lionfish-app-38qhg.ondigitalocean.app/" + id)
+        axios.get(api_endpoint + id)
             .then((res) => {
                 setResultDetails(res.data)
             })
