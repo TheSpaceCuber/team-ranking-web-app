@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const NewRoundForm = () => {
+const NewRoundForm = (props) => {
     const [teamInfo, setTeamInfo] = useState("")
     const [matchResult, setMatchResult] = useState("")
 
@@ -23,6 +23,7 @@ const NewRoundForm = () => {
         axios.post(api_endpoint + "new-round", { teamInfo, matchResult })
             .then(res => {
                 console.log(res.data)
+                props.setResults([...props.results, res.data])
             })
             .catch((err) => {
                 alert(err.response.data.message)

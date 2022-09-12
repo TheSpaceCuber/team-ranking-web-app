@@ -6,8 +6,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table';
 
-const HomePage = () => {
-    const [results, setResults] = useState([])
+const HomePage = (props) => {
+    
     const [resultDetails, setResultDetails] = useState([])
 
     const api_endpoint = process.env.REACT_APP_ENV === "DEV"
@@ -18,17 +18,17 @@ const HomePage = () => {
         axios.get(api_endpoint)
             .then((res) => {
                 console.log('useEffect triggered on Homepage')
-                setResults(res.data)
+                props.setResults(res.data)
             })
             .catch((err) => console.log(err))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [results.length])
+    }, [])
 
     const handleDelete = (id) => {
         axios.delete(api_endpoint + "delete/" + id)
             .then((res) => {
-                console.log(results.filter((result) => result._id !== id))
-                setResults(results.filter((result) => result._id !== id))
+                console.log(props.results.filter((result) => result._id !== id))
+                props.setResults(props.results.filter((result) => result._id !== id))
             })
             .catch((err) => console.log(err))
     }
@@ -53,7 +53,7 @@ const HomePage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {results.map((val, key) => {
+                            {props.results.map((val, key) => {
                                 return (
                                     <tr key={key}>
                                         <td>
