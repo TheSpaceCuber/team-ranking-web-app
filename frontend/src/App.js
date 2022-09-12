@@ -11,6 +11,7 @@ import React, {useState } from "react"
 
 
 function App() {
+  // results contain all the information for all rounds
   const [results, setResults] = useState([])
 
   return (

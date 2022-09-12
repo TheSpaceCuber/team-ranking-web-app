@@ -19,10 +19,8 @@ const NewRoundForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(1)
         axios.post(api_endpoint + "new-round", { teamInfo, matchResult })
             .then(res => {
-                console.log(res.data)
                 props.setResults([...props.results, res.data])
             })
             .catch((err) => {
@@ -30,7 +28,6 @@ const NewRoundForm = (props) => {
                 console.log(err.response.data.message)
             })
         navigate('/')
-        // navigate(0)
     }
 
     return (
