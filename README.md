@@ -57,3 +57,6 @@ If your input is invalid, the application will throw an error with information r
 
 ## Check it out
 https://www.royceho.net/team-ranking-web-app/
+
+## Known Issues
+Refresh button was added as component does not dynamically update in GH Pages, unlike on localhost.
