@@ -3,6 +3,12 @@
 ## Local Setup
 Ensure you have [NodeJS](https://nodejs.org/en/) installed.
 
+In order to connect to MongoDB atlas cluster, you are required to create a `.env` file in the `backend/` folder. You may either ask the admin of this repository for the connection string or create your own cluster. The `.env` file should look something like this:
+```
+DB_CLOUD_URI=mongodb+srv://*****:*****@cluster0.xxxxxxx.mongodb.net/
+ENV=PROD
+```
+
 To start the backend:
 ```
 cd backend/
@@ -59,4 +65,4 @@ If your input is invalid, the application will throw an error with information r
 https://www.royceho.net/team-ranking-web-app/
 
 ## Known Issues
-Refresh button was added as component does not dynamically update in GH Pages, unlike on localhost.
+Refresh button was added as HomePage component does not dynamically update in GH Pages, unlike on localhost. (To be updated as code needs refactoring).
