@@ -65,4 +65,4 @@ If your input is invalid, the application will throw an error with information r
 https://www.royceho.net/team-ranking-web-app/
 
 ## Known Issues
-Refresh button was added as HomePage component does not dynamically update in GH Pages, unlike on localhost. (To be updated as code needs refactoring).
+~~Refresh button was added as HomePage component does not dynamically update in GH Pages, unlike on localhost. (To be updated as code needs refactoring).~~ Fixed.
