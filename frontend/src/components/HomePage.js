@@ -22,7 +22,7 @@ const HomePage = () => {
             })
             .catch((err) => console.log(err))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [results.length])
 
     const handleDelete = (id) => {
         axios.delete(api_endpoint + "delete/" + id)
@@ -70,6 +70,7 @@ const HomePage = () => {
                             })}
                         </tbody>
                     </Table>
+                    <Button onClick={() => window.location.reload(false)} size="sm" variant="primary">Refresh Results</Button>
                 </Col>
                 <Col>
                     <Row>
