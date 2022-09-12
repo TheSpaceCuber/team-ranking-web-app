@@ -13,10 +13,11 @@ const HomePage = () => {
     const api_endpoint = process.env.REACT_APP_ENV === "DEV"
         ? "http://localhost:5000/"
         : "https://lionfish-app-38qhg.ondigitalocean.app/"
-
+    
     useEffect(() => {
         axios.get(api_endpoint)
             .then((res) => {
+                console.log('useEffect triggered on Homepage')
                 setResults(res.data)
             })
             .catch((err) => console.log(err))

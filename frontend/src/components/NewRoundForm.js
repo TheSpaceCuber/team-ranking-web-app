@@ -19,15 +19,17 @@ const NewRoundForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
+        console.log(1)
         axios.post(api_endpoint + "new-round", { teamInfo, matchResult })
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data)
+            })
             .catch((err) => {
                 alert(err.response.data.message)
                 console.log(err.response.data.message)
             })
         navigate('/')
-        navigate(0)
+        // navigate(0)
     }
 
     return (
