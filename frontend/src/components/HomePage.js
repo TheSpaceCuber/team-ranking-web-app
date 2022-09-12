@@ -71,7 +71,6 @@ const HomePage = (props) => {
                             })}
                         </tbody>
                     </Table>
-                    <Button onClick={() => window.location.reload(false)} size="sm" variant="primary">Refresh Results</Button>
                 </Col>
                 <Col>
                     <Row>
